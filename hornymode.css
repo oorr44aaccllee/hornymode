@@ -1,0 +1,68 @@
+/* Arquivo CSS injetado no document_start para evitar flash de conteúdo.
+   Uso do atributo global html[data-hm="1"] como liga/desliga. */
+
+/* 1) Regra principal: elementos marcados explicitamente como hide são removidos. */
+html[data-hm="1"] [data-hm="hide"] {
+  display: none !important;
+  visibility: hidden !important;
+  /* forçar remoção visual mesmo em sistemas com shadow DOM/virtualização */
+  pointer-events: none !important;
+  user-select: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 2) Regra de segurança contra flash:
+   Enquanto um post NÃO foi marcado (isto é, NÃO tem data-hm) e não possui
+   um atributo NSFW claro, escondemos por padrão. Assim o post só aparece
+   quando fica explícito que é NSFW.
+   Note que cobrimos os alvos especificados: shreddit-post, old.reddit, new.reddit. */
+html[data-hm="1"] shreddit-post:not([data-hm]):not([nsfw]):not([over18]):not([over_18]),
+html[data-hm="1"] #siteTable > .thing:not([data-hm]):not([nsfw]):not([over18]):not([over_18]),
+html[data-hm="1"] div[data-testid="post-container"]:not([data-hm]):not([nsfw]):not([over18]):not([over_18]) {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 3) Old Reddit compatibility: posts marcados via classe over18 ficam visíveis. */
+html[data-hm="1"] #siteTable > .thing.over18 {
+  display: block !important;
+  visibility: visible !important;
+}
+
+/* 4) Quando a opção hide-ads está ligada (html terá data-hm-hide-ads="1"),
+   escondemos promovidos por atributos e por classes conhecidas. */
+html[data-hm="1"][data-hm-hide-ads="1"] [promoted],
+html[data-hm="1"][data-hm-hide-ads="1"] [is-promoted],
+html[data-hm="1"][data-hm-hide-ads="1"] shreddit-ad-post,
+html[data-hm="1"][data-hm-hide-ads="1"] .promotedlink,
+html[data-hm="1"][data-hm-hide-ads="1"] .promoted {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 5) Forçar que posts marcados keep sejam exibidos consistentemente. */
+html[data-hm="1"] [data-hm="keep"] {
+  display: block !important;
+  visibility: visible !important;
+}
+
+/* 6) Pequeno reset visual para itens que foram escondidos para evitar "gaps" */
+html[data-hm="1"] [data-hm="hide"] * {
+  display: none !important;
+}
+
+/* 7) A extensão não deve aplicar estilo quando desligada */
+html[data-hm="0"] [data-hm] {
+  /* nada: deixar o reddit fazer o layout normalmente */
+}

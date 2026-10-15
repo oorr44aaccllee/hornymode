@@ -1,0 +1,52 @@
+{
+  "manifest_version": 3,
+  "name": "HornyMode",
+  "version": "1.0.0",
+  "description": "No reddit.com, mostra SOMENTE posts NSFW (esconde os outros).",
+  "icons": {
+    "48": "icon.svg"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.svg"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "*://*.reddit.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.reddit.com/*"
+      ],
+      "css": [
+        "hornymode.css"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "commands": {
+    "toggle-hm": {
+      "suggested_key": {
+        "default": "Alt+Shift+H"
+      },
+      "description": "Toggle HornyMode on reddit"
+    }
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "hornymode@oorr44aaccllee",
+      "strict_min_version": "115.0"
+    }
+  }
+}

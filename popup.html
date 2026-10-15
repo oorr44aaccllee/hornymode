@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <title>HornyMode</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self'">
+    <style>
+      body {
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        margin: 12px;
+        width: 320px;
+        color: #111;
+      }
+      h1 { font-size: 16px; margin: 0 0 8px 0; }
+      label { display: flex; align-items: center; justify-content: space-between; margin: 8px 0; }
+      .counts { font-size: 13px; color: #444; margin-top: 8px; }
+      .footer { font-size: 12px; color: #666; margin-top: 12px; border-top: 1px solid #eee; padding-top: 8px; }
+      .switch { transform: translateY(-1px); }
+      button { margin-top: 8px; padding: 6px 8px; }
+      .small { font-size: 12px; color: #666; }
+    </style>
+  </head>
+  <body>
+    <h1>HornyMode</h1>
+
+    <label>
+      <span>Ativar HornyMode</span>
+      <input id="hmOnSwitch" class="switch" type="checkbox" />
+    </label>
+
+    <label>
+      <span>Esconder promovidos (ads)</span>
+      <input id="hmHideAdsSwitch" type="checkbox" />
+    </label>
+
+    <label>
+      <span>AutoFill (scroll se faltar posts)</span>
+      <input id="hmAutoFillSwitch" type="checkbox" />
+    </label>
+
+    <div class="counts">
+      <div>Total: <span id="countTotal">-</span></div>
+      <div>Visíveis: <span id="countVisible">-</span></div>
+      <div>Escondidos: <span id="countHidden">-</span></div>
+      <div class="small">Última verificação: <span id="countAt">-</span></div>
+    </div>
+
+    <div class="footer">
+      Atalho: Alt+Shift+H (alterna e atualiza o selo 18+). Funciona mesmo se a aba do Reddit não for a ativa.
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
